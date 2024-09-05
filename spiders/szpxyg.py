@@ -234,7 +234,7 @@ class szpxyg():
 
 SPIDER = partial(
 	szpxyg, 
-	workers=10,
+	workers=3,
 	is_test=False,
 )
 
