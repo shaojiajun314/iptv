@@ -1,0 +1,6 @@
+m3u8==6.0.0
+requests==2.28.2
+wsgidav==4.3.3
+cheroot==10.0.1
+opencv-python==4.9.0.80
+beautifulsoup4==4.12.3
