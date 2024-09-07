@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+
+  server:
+    tty: true
+    image: python:3.9.6
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/server

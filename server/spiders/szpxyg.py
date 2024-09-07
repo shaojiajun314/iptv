@@ -3,6 +3,7 @@ import requests
 from time import sleep
 from queue import Queue
 from pathlib import Path
+from random import randint
 from bs4 import BeautifulSoup
 from functools import partial
 from json import dumps, loads
@@ -45,11 +46,10 @@ class szpxyg():
 			self.write_process()
 		else:
 			self.read_process()
-
-		self.proxy = {
-			'http': proxy,
-			'https': proxy,
-		} if isinstance(proxy, str) else proxy
+		self.proxies = [proxy] if isinstance(proxy, (str, type(None))) else proxy
+		assert isinstance(self.proxies, list)
+		if not(None in self.proxies):
+			self.proxies.append(None)
 
 		if is_test:
 			self.episode_sleep_dur = 0
@@ -69,11 +69,22 @@ class szpxyg():
 				d = loads(f.read())
 		self.process_list = set(d)
 
+	@property
+	def proxy(self):
+		if not self.proxies:
+			return None
+		index = randint(0, len(self.proxies)-1)
+		return self.proxies[index]
+
 	@retry
 	def get(self, url):
+		p = self.proxy
 		response = requests.get(
 			url,
-			proxies=self.proxy
+			proxies={
+				'http': p,
+				'https': p,
+			}
 		)
 		if response.status_code != 200:
 			print(f'status code: {response.status_code}, url: {url}')
