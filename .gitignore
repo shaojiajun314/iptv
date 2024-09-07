@@ -1,6 +1,6 @@
-var
-wsgidav_cp
-tmp
+*var
+*wsgidav_cp
+*tmp
 *.sqlite3
 *.jpeg
 *.mp4
