@@ -169,7 +169,7 @@ class SPIDER():
 					)
 
 if __name__ == '__main__':
-	pcp = ProxyManaGer('./proxy_conf.yaml')
+	pcp = ProxyManaGer('./proxies_conf.yaml')
 	# pcp.run()
 	# exit()
 	s = SPIDER(

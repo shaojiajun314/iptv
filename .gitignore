@@ -6,3 +6,4 @@
 *.mp4
 *.json
 *__pycache__/
+server/proxies_conf.yaml
