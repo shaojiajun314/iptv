@@ -165,13 +165,13 @@ class MultiFFMPEGWorker():
 				'length': len(allUrls),
 				'complete': 0
 			}
-			queue.put(conf["length"])
+			queue and queue.put(conf["length"])
 			with ThreadPoolExecutor(max_workers=self.workers) as executor:
 				list(executor.map(lambda x: self.download(*x), [
 					(i, tmp, conf, queue)
 					for i in allUrls
 				]))
-			queue.put(0)
+			queue and queue.put(0)
 			ret = m3u.toMp4(tmp, mp4_path, UrlStrMap)
 		return ret
 	@retry
@@ -197,7 +197,7 @@ class MultiFFMPEGWorker():
 		with conf['lock']:
 			conf['complete'] += 1
 			print(f'{conf["complete"]} / {conf["length"]}')
-			queue.put(conf["complete"])
+			queue and queue.put(conf["complete"])
 	SHUFFIX_MAP = {
 		'm3u8': m3u8
 	}
@@ -205,12 +205,12 @@ class MultiFFMPEGWorker():
 
 if __name__ == '__main__':
 	url = 'https://ukzy.ukubf4.com/20230116/FA8P2t2A//2000kb/hls/index.m3u8'
-
+	url = 'https://v.gsuus.com/play/9b6Z9VVb/index.m3u8'
 	a = MultiFFMPEGWorker(
 		workers=10,
 		is_test=True,
 	)
-	a.m3u8Fetcher(url, 'kuangbiao8.mp4')
+	a.m3u8Fetcher(url, '抓娃娃.mp4')
 
 
 
